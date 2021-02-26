@@ -10,10 +10,13 @@
 #include "switch.h"
 
 //variables global to the IRQ handlers which dictates if timer is enabled &  timer counter
+//Boolean 1=True 0=False
 int LED_Toggle = 1;
 int SW2_Pressed = 0;
-int counter = 0;
 int Timer_Enabled = 1;
+
+//Int counter
+int counter = 0;
 
 void PDB0_IRQHandler(void){ //For PDB timer
 	
