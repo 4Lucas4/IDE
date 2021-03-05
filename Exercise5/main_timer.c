@@ -49,7 +49,7 @@ void initPDB(void){
 	//Set the mod field to get a 1 second period.
 	//There is a division by 2 to make the LED blinking period 1 second.
 	//This translates to two mod counts in one second (one for on, one for off)
-	PDB0_MOD |= PDB_MOD_MOD(0x2); // modulus division by 2 TODO NOT SURE IF THIS IS RIGHT
+	PDB0_MOD = PDB_MOD_MOD(DEFAULT_SYSTEM_CLOCK/(20*128*2)); // modulus division by 2 TODO NOT SURE IF THIS IS RIGHT
 
 	//Configure the Interrupt Delay register.
 	PDB0_IDLY = 10;
@@ -59,6 +59,7 @@ void initPDB(void){
 
 	//Enable LDOK to have PDB0_SC register changes loaded.
 	PDB0_SC |= PDB_SC_LDOK_MASK;
+	PDB0_SC &= ~PDB_SC_PDBEN_MASK; // Disable PDB0 Timer bit 7 
 
 	return;
 }
